@@ -1,0 +1,20 @@
+apiVersion: apps/v1 #k8s API version
+kind: Deployment # 리소스 타입
+metadata:
+  name: mcp-context7-deployment # Deployment 이름
+spec:
+  replicas: 1 # 실행할 파드의 개수
+  selector: # 이 Deployment가 관리할 파드에 대한 설정
+    matchLabels:
+      app: mcp-context7 # 파드에 매치시킬 label 이름
+  template: # 파드 템플릿
+    metadata:
+      labels:
+        app: mcp-context7 # 파드에 부여할 label 이름
+    spec:
+      containers:
+      - name: mcp-context7-container # 컨테이너 이름
+        image: mcp-context7:latest # 사용할 이미지
+        imagePullPolicy: Never # 이미지 풀링 정책
+        ports:
+        - containerPort: 80 # 컨테이너 노출할 포트

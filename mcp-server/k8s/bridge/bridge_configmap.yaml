@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mcp-bridge-config
+data:
+  config.json: |
+    {
+      "mcp_servers": {
+        "Context7": {
+            "command": "npx",
+            "args": ["mcp-remote", "http://mcp-context7/sse", "--allow-http"]
+          }
+      }
+    }
