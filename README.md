@@ -32,3 +32,54 @@
 ### [k8s  - Kustomize](./docs/kustomize.md)
 
 ---
+
+## 5. k8s mcp-server 실행 방법
+
+### 5.1 kind 클러스터 준비
+- 클러스터 삭제:
+  ```bash
+  kind delete cluster --name mcp-cluster
+  ```
+- 클러스터 생성:
+  ```bash
+  kind create cluster --name mcp-cluster
+  ```
+
+### 5.2 필수 컴포넌트 설치 (Helm)
+- ingress-nginx 설치:
+  ```bash
+  helm install nginx-ingress ingress-nginx/ingress-nginx \
+    --namespace ingress-nginx --create-namespace
+  ```
+- cert-manager 설치:
+  ```bash
+  helm install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace \
+    --set installCRDs=true
+  ```
+
+### 5.3 ArgoCD 설치 및 접속
+- 네임스페이스 생성:
+  ```bash
+  kubectl create namespace argocd
+  ```
+- 설치:
+  ```bash
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  ```
+- admin 비밀번호 확인:
+  ```bash
+  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+  ```
+- 포트포워딩 및 브라우저 접속:
+  ```bash
+  kubectl port-forward svc/argocd-server -n argocd 8080:443
+  # 브라우저: https://localhost:8080
+  ```
+
+### 5.4 CD 설정
+- infra-cd 저장소 활용:
+  - Repository: `https://github.com/MiddleKD/infra-cd.git`
+  - kustomize 경로: `mcp-server/kustomize/overlays/dev`
+
+---
