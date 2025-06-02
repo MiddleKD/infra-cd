@@ -1,0 +1,25 @@
+# Default values for mcp-server
+replicaCount: 1
+
+image:
+  mcp-bridge:
+    repository: middlek/mcp-bridge
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  mcp-context7:
+    repository: middlek/mcp-context7
+    tag: latest
+    pullPolicy: IfNotPresent
+
+config:
+  mcp-context7:
+    enabled: true
+    name: "Context7"
+    command: "npx"
+    args: ["mcp-remote", "http://mcp-context7/sse", "--allow-http"]
+    # env: 
+
+service:
+  type: ClusterIP
+  port: 8000

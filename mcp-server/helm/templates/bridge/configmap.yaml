@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mcp-bridge-config
+data:
+  config.json: |
+    {
+      "mcp_servers": {
+        {{- $first := true }}
+        {{- range $key, $config := .Values.config }}
+        {{- if $config.enabled }}
+        {{- if not $first }},{{ end }}
+        "{{ $config.name }}": {
+          "command": "{{ $config.command }}",
+          "args": [{{ range $i, $arg := $config.args }}{{ if $i }}, {{ end }}"{{ $arg }}"{{ end }}]{{ if $config.env }},
+          "env": {
+            {{- $firstEnv := true }}
+            {{- range $envKey, $envValue := $config.env }}
+            {{- if not $firstEnv }},{{ end }}
+            "{{ $envKey }}": "{{ $envValue }}"
+            {{- $firstEnv = false }}
+            {{- end }}
+          }
+          {{- end }}
+        }
+        {{- $first = false }}
+        {{- end }}
+        {{- end }}
+      }
+    }
