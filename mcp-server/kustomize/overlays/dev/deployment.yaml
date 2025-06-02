@@ -3,4 +3,4 @@ kind: Deployment # 리소스 타입
 metadata:
   name: mcp-bridge-deployment # Deployment 이름
 spec:
-  replicas: 2 # 실행할 파드의 개수
+  replicas: 3 # 실행할 파드의 개수
