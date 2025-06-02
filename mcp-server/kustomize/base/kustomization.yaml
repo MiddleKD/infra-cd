@@ -1,0 +1,8 @@
+resources:
+  - bridge/deployment.yaml
+  - bridge/service.yaml
+  - bridge/configmap.yaml
+  - ingress.yaml
+  - mcp/context7/deployment.yaml
+  - mcp/context7/service.yaml
+  

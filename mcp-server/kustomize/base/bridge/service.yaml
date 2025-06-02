@@ -1,0 +1,16 @@
+apiVersion: v1 # k8s core API 버전
+kind: Service # 리소스 타입
+metadata:
+  name: mcp-bridge # 서비스 이름
+spec:
+  selector: # 서비스가 트래픽을 라우팅할 때 사용할 파드
+    app: mcp-bridge # 파드에 부여한 label
+  ports:
+    - name: http-sse  # 포트 이름 (선택사항이지만 명시하는 것이 좋음)
+      protocol: TCP  # SSE는 HTTP 위에서 동작하므로 TCP 사용
+      port: 8000        # 서비스 포트 (외부에 노출될 포트)
+      targetPort: 8000  # 파드의 애플리케이션이 수신 대기하는 포트
+  # SSE를 위한 추가 어노테이션 (선택사항)
+  # annotations:
+  #   nginx.ingress.kubernetes.io/proxy-buffering: "off"  # NGINX 인그레스 사용 시 버퍼링 비활성화
+  #   nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"  # 긴 연결을 위한 타임아웃 설정

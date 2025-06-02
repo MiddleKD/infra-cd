@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mcp-ingress
+  annotations:
+    # Nginx Ingress Controller 어노테이션
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # 인증서 자동 발급 (cert-manager 사용 시)
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - mcp-server.local.com
+    secretName: mcp-tls-secret
+  rules:
+  # 모든 트래픽을 mcp-bridge로 라우팅
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mcp-bridge  # 서비스 이름
+            port:
+              number: 8000  # 서비스 포트
