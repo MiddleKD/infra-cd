@@ -1,6 +1,5 @@
 resources:
   - ../../base
-
 patches:
   - target:
       group: apps
@@ -8,3 +7,4 @@ patches:
       kind: Deployment
       name: mcp-bridge-deployment
     path: deployment.yaml
+images: []
