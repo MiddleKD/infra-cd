@@ -8,3 +8,9 @@ patches:
       kind: Deployment
       name: mcp-context7-deployment
     path: deployment.yaml
+
+images:
+  - name: mcp-bridge
+    newTag: latest
+  - name: mcp-context7
+    newTag: latest
