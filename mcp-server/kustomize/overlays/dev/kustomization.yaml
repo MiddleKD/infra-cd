@@ -7,9 +7,8 @@ patches:
       kind: Deployment
       name: mcp-bridge-deployment
     path: deployment.yaml
-
 images:
   - name: middlek/mcp-bridge
-    newTag: latest
+    newTag: 801e46e68bda4bfb0f95d274fc8fd3bf1701a44d
   - name: middlek/mcp-context7
-    newTag: latest
+    newTag: 801e46e68bda4bfb0f95d274fc8fd3bf1701a44d
