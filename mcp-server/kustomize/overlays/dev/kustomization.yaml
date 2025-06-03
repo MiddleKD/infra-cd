@@ -1,6 +1,5 @@
 resources:
   - ../../base
-
 patches:
   - target:
       group: apps
@@ -10,7 +9,7 @@ patches:
     path: deployment.yaml
 
 images:
-  - name: mcp-bridge
+  - name: middlek/mcp-bridge
     newTag: latest
-  - name: mcp-context7
+  - name: middlek/mcp-context7
     newTag: latest
