@@ -9,6 +9,6 @@ patches:
     path: deployment.yaml
 images:
   - name: middlek/mcp-bridge
-    newTag: 801e46e68bda4bfb0f95d274fc8fd3bf1701a44d
+    newTag: a93198f2f355a84ff0462c5de448e5a394be3842
   - name: middlek/mcp-context7
-    newTag: 801e46e68bda4bfb0f95d274fc8fd3bf1701a44d
+    newTag: a93198f2f355a84ff0462c5de448e5a394be3842
